@@ -7,6 +7,9 @@ name = "trap"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = ["numpy", "pandas", "requests"]
+description = "Searching pure noise for trading strategies, then deflating the winner."
+readme = "README.md"
+license = { text = "MIT" }
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff", "mypy", "pandas-stubs", "types-requests", "pre-commit"]

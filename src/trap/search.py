@@ -43,10 +43,11 @@ def search_grid(
             rows.append(
                 {
                     "name": name,
+                    "fast": fast,
+                    "slow": slow,
                     "sr": sharpe_ratio(returns, periods_per_year=1),
                     "sharpe": sharpe_ratio(returns),
                 }
             )
-
     table = pd.DataFrame(rows).sort_values("sr", ascending=False).reset_index(drop=True)
     return table, returns_by_name

@@ -31,7 +31,7 @@ def holdout_check(
     # 1) Choose the winner using ONLY the training period.
     table, _ = search_grid(p[:split], fasts, slows, fee)
     best = table.iloc[0]
-    fast, slow = (int(x) for x in str(best["name"]).split("_")[2:])
+    fast, slow = int(best["fast"]), int(best["slow"])
 
     # 2) Judge it on the later period. Signals use only past prices, so
     #    computing them on the full series is safe (the moving averages are warmed up).

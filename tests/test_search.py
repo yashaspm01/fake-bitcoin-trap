@@ -24,3 +24,10 @@ def test_returns_dict_matches_table():
     prices = make_fake_prices(300, seed=2)
     table, returns = search_grid(prices, [5, 10], [20, 30])
     assert set(table["name"]) == set(returns)
+
+
+def test_table_has_numeric_fast_and_slow():
+    prices = make_fake_prices(300, seed=2)
+    table, _ = search_grid(prices, [5, 10], [20, 30])
+    row = table.iloc[0]
+    assert row["name"] == f"ma_cross_{int(row['fast'])}_{int(row['slow'])}"
