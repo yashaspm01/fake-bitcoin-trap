@@ -31,4 +31,3 @@ def save_json(data: dict[str, Any], path: str | Path) -> None:
 def load_json(path: str | Path) -> dict[str, Any]:
     with Path(path).open() as f:
         return json.load(f)
-

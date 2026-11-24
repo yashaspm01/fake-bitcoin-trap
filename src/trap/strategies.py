@@ -60,8 +60,7 @@ class MovingAverageCrossover(Strategy):
         fast_ma = moving_average(prices, self.fast)
         slow_ma = moving_average(prices, self.slow)
         return [
-            1 if f is not None and s is not None and f > s else 0
-            for f, s in zip(fast_ma, slow_ma)
+            1 if f is not None and s is not None and f > s else 0 for f, s in zip(fast_ma, slow_ma)
         ]
 
 
@@ -70,13 +69,6 @@ def count_trades(signals: list[int]) -> int:
     return sum(1 for a, b in zip(signals, signals[1:]) if a != b)
 
 
-def strategy_grid(
-    fasts: list[int], slows: list[int]
-) -> list[MovingAverageCrossover]:
+def strategy_grid(fasts: list[int], slows: list[int]) -> list[MovingAverageCrossover]:
     """Every valid (fast, slow) pair as a strategy object."""
-    return [
-        MovingAverageCrossover(fast=f, slow=s)
-        for f in fasts
-        for s in slows
-        if f < s
-        ]
+    return [MovingAverageCrossover(fast=f, slow=s) for f in fasts for s in slows if f < s]
