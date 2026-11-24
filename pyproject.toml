@@ -8,6 +8,12 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = ["numpy", "pandas", "requests"]
 
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy", "pandas-stubs", "types-requests", "pre-commit"]
+
+[project.scripts]
+trap = "trap.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
@@ -21,3 +27,9 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+disallow_untyped_defs = true
+warn_unused_ignores = true
