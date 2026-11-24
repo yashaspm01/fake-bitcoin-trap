@@ -12,7 +12,7 @@ dependencies = ["numpy", "pandas", "requests"]
 dev = ["pytest", "ruff", "mypy", "pandas-stubs", "types-requests", "pre-commit"]
 
 [project.scripts]
-trap = "trap.cli:main"
+faketrap = "trap.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

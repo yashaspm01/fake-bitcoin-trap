@@ -14,7 +14,9 @@ log = logging.getLogger(__name__)
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="trap", description="The Fake Bitcoin Trap experiments.")
+    parser = argparse.ArgumentParser(
+        prog="faketrap", description="The Fake Bitcoin Trap experiments."
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="show debug logs")
     sub = parser.add_subparsers(dest="command", required=True)
 
