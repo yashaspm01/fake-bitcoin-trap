@@ -1,14 +1,16 @@
-"""Command-line interface. Try `trap --help`."""
+"""Command-line interface. Try `faketrap --help`."""
 
 import argparse
 import logging
 from collections.abc import Callable, Sequence
+from pathlib import Path
 
 from trap import experiment
 from trap.data import fetch_daily_closes
 from trap.holdout import holdout_check
 from trap.logging_setup import setup_logging
 from trap.paths import RESULTS_DIR
+from trap.report import build_report
 
 log = logging.getLogger(__name__)
 
@@ -31,6 +33,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     holdout = sub.add_parser("holdout", help="choose on early data, judge on later data")
     holdout.add_argument("--train-fraction", type=float, default=0.5)
+
+    report = sub.add_parser("report", help="write a static HTML report")
+    report.add_argument("--out", type=Path, default=Path("site"))
+    report.add_argument("--series", type=int, default=experiment.N_SERIES)
     return parser
 
 
@@ -69,11 +75,18 @@ def cmd_holdout(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_report(args: argparse.Namespace) -> int:
+    path = build_report(args.out, args.series)
+    log.info("wrote %s", path)
+    return 0
+
+
 COMMANDS: dict[str, Callable[[argparse.Namespace], int]] = {
     "download": cmd_download,
     "noise": cmd_noise,
     "real": cmd_real,
     "holdout": cmd_holdout,
+    "report": cmd_report,
 }
 
 
